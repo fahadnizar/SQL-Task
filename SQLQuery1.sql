@@ -26,7 +26,7 @@ select * from employees
 select salary from employees
 --3. From the table, write a SQL query to find the unique designations of the employees. Return job name. 
 select distinct job_name from employees;
---4. From the following table, write a SQL query to list the employees’ names, increase their salary by 15%, and express the number of Dollars.
+--4. From the following table, write a SQL query to list the employeesâ€™ names, increase their salary by 15%, and express the number of Dollars.
 select emp_name, format((salary*1.15),'C') as "salary" from employees;
 --5. From the following table, write a SQL query to list the employee's name and job name as a format of "Employee & Job".
 SELECT emp_name+'   '+job_name AS "Employee & Job" FROM employees ;
@@ -40,9 +40,9 @@ SELECT emp_id,salary,commission FROM employees;
 SELECT * FROM employees WHERE dep_id NOT IN (2001);
 --10. From the following table, write a SQL query to find those employees who joined before 1991. Return complete information about the employees.
 SELECT * FROM employees WHERE hire_date<('1991-1-1');
---11. From the following table, write a SQL query to compute the average salary of those employees who work as ‘ANALYST’. Return average salary.
+--11. From the following table, write a SQL query to compute the average salary of those employees who work as â€˜ANALYSTâ€™. Return average salary.
 SELECT avg(salary) FROM employees WHERE job_name = 'ANALYST';
---12. From the following table, write a SQL query to find the details of the employee ‘BLAZE’.
+--12. From the following table, write a SQL query to find the details of the employee â€˜BLAZEâ€™.
 SELECT * FROM employees WHERE emp_name = 'BLAZE';
 --13. From the following table, write a SQL query to find those employees whose salary exceeds 3000 after giving a 25% increment. Return complete information about the employees. 
 SELECT * FROM employees WHERE (1.25*salary)>3000;
@@ -91,23 +91,23 @@ where emp.dep_id=dep.dep_id and emp.dep_id in ('1001','2001');
 select manager_id, count(*) as "count" from employees group by manager_id order by manager_id asc;
 --22. From the table, write a SQL query to find those departments where at least two employees work. Return department id, number of employees.(GROUP BY & HAVING)
 select dep_id,count(*) as "count" from employees group by dep_id having count(*)>=2;
---23. From the table, write a SQL query to find those employees whose names contain the character set 'AR' together. Return complete information about the employees. (using ‘like’)
+--23. From the table, write a SQL query to find those employees whose names contain the character set 'AR' together. Return complete information about the employees. (using â€˜likeâ€™)
 select * from employees
 where emp_name like '%AR%';
---24. Add a column for “Gender” in the employee table and update each row accordingly.
+--24. Add a column for â€œGenderâ€ in the employee table and update each row accordingly.
 alter table employees
 add gender varchar(20);
 update employees set gender = 'MALE' where emp_id in ('68319','66928','65646','69062','68454','69324'); 
 update employees set gender = 'FEMALE' where emp_id NOT IN ('68319','66928','65646','69062','68454','69324');
 select * from employees;
---25. From the above table we need to retrieve all employees except ‘Manager’ & ’President’ Job name. 
+--25. From the above table we need to retrieve all employees except â€˜Managerâ€™ & â€™Presidentâ€™ Job name. 
 select * from employees
 where job_name not in ('MANAGER','PRESIDENT');
---26. From the above table we need to display ‘Management Level’ - labelname for ‘President’,’Manager’,’Analyst’ jobs and ‘Employee Level’ - label name for ‘Salesman’,’Clerk’ job names.
+--26. From the above table we need to display â€˜Management Levelâ€™ - labelname for â€˜Presidentâ€™,â€™Managerâ€™,â€™Analystâ€™ jobs and â€˜Employee Levelâ€™ - label name for â€˜Salesmanâ€™,â€™Clerkâ€™ job names.
 select distinct(job_name),
 	case
 		 when  job_name in ('PRESIDENT','MANAGER','ANALYST') then 'Management Level'
 		 when  job_name in ('SALESMAN','CLERK') then 'Employee Level'end as 'label' from employees;
---27. Update commission field to 650.00 for job name titled as  “analyst” in “employee” table using “Exist” clauses.
+--27. Update commission field to 650.00 for job name titled as  â€œanalystâ€ in â€œemployeeâ€ table using â€œExistâ€ clauses.
 update employees set commission=650.00 from employees where job_name='ANALYST' and exists(select job_name from employees where job_name='ANALYST'); 
 select * from employees;
